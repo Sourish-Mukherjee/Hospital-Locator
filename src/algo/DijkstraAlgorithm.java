@@ -1,5 +1,6 @@
 package algo;
 
+import gui.GraphPanel;
 import java.util.*;
 import javax.swing.JOptionPane;
 import models.Edge;
@@ -10,7 +11,6 @@ public class DijkstraAlgorithm {
 
     private boolean safe = false;
     private String message = null;
-
     private final Graph graph;
     private final Map<Node, Node> predecessors;
     private final Map<Node, Integer> distances;
@@ -18,6 +18,7 @@ public class DijkstraAlgorithm {
     private PriorityQueue<Node> unvisited;
     private final HashSet<Node> visited;
     private int flag = 0;
+    private Node NearestHospital = null;
 
     public class NodeComparator implements Comparator<Node> {
 
@@ -65,7 +66,7 @@ public class DijkstraAlgorithm {
         if (!safe) {
             throw new IllegalStateException(message);
         }
-
+        int min = Integer.MAX_VALUE;
         unvisited = new PriorityQueue<>(graph.getNodes().size(), new NodeComparator());
 
         Node source = graph.getSource();
@@ -91,8 +92,14 @@ public class DijkstraAlgorithm {
             updateDistance(current);
             unvisited.remove(current);
             visited.add(current);
+            System.out.println(Graph.hospitalNode);
+            if (distances.get(current) < min) {
+                if (Graph.hospitalNode.contains(current)) {
+                    min = distances.get(current);
+                    NearestHospital = current;
+                }
+            }
         }
-
         for (Node node : graph.getNodes()) {
 
             node.setPath(getPath(node));
@@ -179,6 +186,10 @@ public class DijkstraAlgorithm {
                     "NO PATH AVAILABLE!",
                     "Warning Panel!",
                     JOptionPane.WARNING_MESSAGE);
+            Graph.destination = NearestHospital;
+            GraphPanel gp = new GraphPanel(graph);
+            gp.setPath(getDestinationPath());
+            flag = 0;
             return null;
         }
         Collections.reverse(path);

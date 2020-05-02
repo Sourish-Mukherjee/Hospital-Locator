@@ -157,17 +157,29 @@ public class DrawUtils {
         g.setColor(parseColor("#000000"));
         drawCentreText(String.valueOf(node.getId()), node.getX(), node.getY());
     }
+        public void drawRedZoneNode(Node node) {
+        g.setColor(parseColor("#FF0000"));
+        g.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
 
+        radius -= 5;
+        g.setColor(parseColor("#FFCDD2"));
+        g.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
+
+        radius += 5;
+        g.setColor(parseColor("#FF0000"));
+        drawCentreText(String.valueOf(node.getId()), node.getX(), node.getY());
+
+    }
     public void drawNode(Node node){
-        g.setColor(parseColor("#9C27B0"));
+        g.setColor(parseColor("#CD853F"));
         g.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
 
         radius-=5;
-        g.setColor(parseColor("#E1BEE7"));
+        g.setColor(parseColor("#FFD700"));
         g.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
 
         radius+=5;
-        g.setColor(parseColor("#9C27B0"));
+        g.setColor(parseColor("#000000"));
         drawCentreText(String.valueOf(node.getId()), node.getX(), node.getY());
     }
 
@@ -214,19 +226,4 @@ public class DrawUtils {
     private static int distToSegment(Point p, Point v, Point w) {
         return (int) Math.sqrt(distToSegmentSquared(p, v, w));
     }
-
-    public void drawRedZoneNode(Node node) {
-        g.setColor(parseColor("#FF0000"));
-        g.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
-
-        radius -= 5;
-        g.setColor(parseColor("#FFCDD2"));
-        g.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
-
-        radius += 5;
-        g.setColor(parseColor("#FF0000"));
-        drawCentreText(String.valueOf(node.getId()), node.getX(), node.getY());
-
-    }
-
 }

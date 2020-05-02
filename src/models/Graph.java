@@ -10,7 +10,7 @@ public class Graph {
     private List<Node> nodes = new ArrayList<>();
     private List<Edge> edges = new ArrayList<>();
     public static List<Node> redZoneNode = new ArrayList<>();
-    private List<Node> hospitalNode=new ArrayList<>();
+    public static List<Node> hospitalNode=new ArrayList<>();
     private Node source;
     public static Node destination;
 

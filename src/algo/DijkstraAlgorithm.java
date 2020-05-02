@@ -92,7 +92,6 @@ public class DijkstraAlgorithm {
             updateDistance(current);
             unvisited.remove(current);
             visited.add(current);
-            System.out.println(Graph.hospitalNode);
             if (distances.get(current) < min) {
                 if (Graph.hospitalNode.contains(current)) {
                     min = distances.get(current);

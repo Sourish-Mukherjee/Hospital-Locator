@@ -216,7 +216,7 @@ public class DrawUtils {
     }
 
     public void drawRedZoneNode(Node node) {
-        g.setColor(parseColor("#F54420"));
+        g.setColor(parseColor("#FF0000"));
         g.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
 
         radius -= 5;
@@ -224,7 +224,7 @@ public class DrawUtils {
         g.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
 
         radius += 5;
-        g.setColor(parseColor("#F54420"));
+        g.setColor(parseColor("#FF0000"));
         drawCentreText(String.valueOf(node.getId()), node.getX(), node.getY());
 
     }

@@ -32,7 +32,7 @@ public class MainWindow extends JPanel implements resources.Constants {
     }
 
     private void setTopPanel() {
-        JLabel info = new JLabel("Covid-19 Shortest Path Checker");
+        JLabel info = new JLabel("COVID-19 Shortest Path Checker");
         Font f = info.getFont();
         info.setFont(new Font("Serif", Font.BOLD, 34));
         info.setForeground(new Color(255, 0, 0));

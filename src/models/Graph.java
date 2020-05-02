@@ -10,6 +10,7 @@ public class Graph {
     private List<Node> nodes = new ArrayList<>();
     private List<Edge> edges = new ArrayList<>();
     public static List<Node> redZoneNode = new ArrayList<>();
+    private List<Node> hospitalNode=new ArrayList<>();
     private Node source;
     public static Node destination;
 
@@ -144,4 +145,19 @@ public class Graph {
         redZoneNode.remove(node);
     }
 
+	public boolean isHospitalNode(Node node) {
+		if(hospitalNode.contains(node))
+			return true;
+		return false;
+	}
+
+	public void setHospitalNode(Node node) {
+		if(!hospitalNode.contains(node))
+			hospitalNode.add(node);
+	}
+
+	public void removeHospitalNode(Node node) {
+		hospitalNode.remove(node);
+		System.out.println(hospitalNode.size());
+	}
 }

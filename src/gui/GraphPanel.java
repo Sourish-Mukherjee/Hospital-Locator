@@ -76,6 +76,8 @@ public class GraphPanel extends JPanel implements MouseListener, MouseMotionList
                 drawUtils.drawDestinationNode(node);
             else if(graph.isRedZoneNode(node))
             	drawUtils.drawRedZoneNode(node);
+			else if(graph.isHospitalNode(node))
+				drawUtils.drawHospitalNode(node);
             else
                 drawUtils.drawNode(node);
         }
@@ -84,49 +86,77 @@ public class GraphPanel extends JPanel implements MouseListener, MouseMotionList
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        Node selected = null;
-        for(Node node : graph.getNodes()) {
-            if(DrawUtils.isWithinBounds(e, node.getCoord())){
-                selected = node;
-                break;
-            }
-        }
+    	Node selected = null;
+		for(Node node : graph.getNodes()) {
+			if(DrawUtils.isWithinBounds(e, node.getCoord())){
+				selected = node;
+				break;
+			}
+		}
 
-        if(selected!=null) {
-            if(e.isControlDown() && e.isShiftDown()){
-                graph.deleteNode(selected);
-                graph.setSolved(false);
-                repaint();
-                return;
-            } else if(e.isControlDown() && graph.isSolved()){
-                path = selected.getPath();
-                repaint();
-                return;
-            } else if(e.isShiftDown()){
-                if(SwingUtilities.isLeftMouseButton(e)){
-                    if(!graph.isDestination(selected))
-                        graph.setSource(selected);
-                    else
-                        JOptionPane.showMessageDialog(null, "Destination can't be set as Source");
-                } else if(SwingUtilities.isRightMouseButton(e)) {
-                    if(!graph.isSource(selected))
-                        graph.setDestination(selected);
-                    else
-                        JOptionPane.showMessageDialog(null, "Source can't be set as Destination");
-                } else if(SwingUtilities.isMiddleMouseButton(e)) {
-                	if(!graph.isRedZoneNode(selected))
-                		graph.setRedZone(selected);
-                	else
-                		graph.removeRedZone(selected);
-                }
-                else
-                    return;
+		if(selected!=null) {
+			if(e.isControlDown() && e.isShiftDown()){
+				graph.deleteNode(selected);
+				graph.setSolved(false);
+				repaint();
+				return;
+			} else if(e.isControlDown() && graph.isSolved()){
+				path = selected.getPath();
+				repaint();
+				return;
+			} else if(e.isShiftDown()){
+				if(SwingUtilities.isLeftMouseButton(e)){
+					if(graph.isRedZoneNode(selected))
+						JOptionPane.showMessageDialog(null,"A red zone area can't be marked as the source","Warning",JOptionPane.WARNING_MESSAGE);
+					else {
+						if(!graph.isDestination(selected))
+							graph.setSource(selected);
+						else
+							JOptionPane.showMessageDialog(null, "Destination can't be set as the Source","Warning",JOptionPane.WARNING_MESSAGE);
+					}
+				} else if(SwingUtilities.isRightMouseButton(e)) {
+					if(graph.isRedZoneNode(selected))
+						JOptionPane.showMessageDialog(null,"A red zone area can't be marked as the destination","Warning",JOptionPane.WARNING_MESSAGE);
+					else if(!graph.isHospitalNode(selected))
+						JOptionPane.showMessageDialog(null,"Only a hospital can be marked as a destination","Warning",JOptionPane.WARNING_MESSAGE);
+					else {
+						if(!graph.isSource(selected))
+							graph.setDestination(selected);
+						else
+							JOptionPane.showMessageDialog(null, "Source can't be set as Destination","Warning",JOptionPane.WARNING_MESSAGE);
+					}
+				} 				else
+					return;
 
-                graph.setSolved(false);
-                repaint();
-                return;
-            }
-        }
+				graph.setSolved(false);
+				repaint();
+				return;
+			}
+			else if(e.isAltDown()) {
+				if(SwingUtilities.isLeftMouseButton(e)) {
+					if(graph.isRedZoneNode(selected))
+						JOptionPane.showMessageDialog(null,"A red zone can't be marked as a hospital","Warning",JOptionPane.WARNING_MESSAGE);
+					if(!graph.isHospitalNode(selected))
+						graph.setHospitalNode(selected);
+					else
+						graph.removeHospitalNode(selected);
+				}
+				else if(SwingUtilities.isRightMouseButton(e)) {
+					if(!graph.isRedZoneNode(selected)) {
+						if(!graph.isDestination(selected) && !graph.isSource(selected) && !graph.isHospitalNode(selected))
+							graph.setRedZone(selected);
+						else
+							JOptionPane.showMessageDialog(null, "Source, Destination or Hospitals can't be set as Red Zone Areas","Warning",JOptionPane.WARNING_MESSAGE);
+					}
+					else
+						graph.removeRedZone(selected);
+				}
+
+				graph.setSolved(false);
+				repaint();
+				return;
+			}
+		}
 
         if(hoveredEdge!=null){
             if(e.isControlDown() && e.isShiftDown()){

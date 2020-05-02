@@ -121,41 +121,52 @@ public class DrawUtils {
         radius -= 5;
     }
 
-    public void drawSourceNode(Node node) {
+    public void drawSourceNode(Node node){
+        g.setColor(parseColor("#228B22"));
+        g.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
+
+        radius-=5;
+        g.setColor(parseColor("#90EE90"));
+        g.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
+
+        radius+=5;
+        g.setColor(parseColor("#228B22"));
+        drawCentreText(String.valueOf(node.getId()), node.getX(), node.getY());
+    }
+    public void drawHospitalNode(Node node){
         g.setColor(parseColor("#00BCD4"));
         g.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
 
-        radius -= 5;
+        radius-=5;
         g.setColor(parseColor("#B2EBF2"));
         g.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
 
-        radius += 5;
+        radius+=5;
         g.setColor(parseColor("#00BCD4"));
         drawCentreText(String.valueOf(node.getId()), node.getX(), node.getY());
     }
-
-    public void drawDestinationNode(Node node) {
+    public void drawDestinationNode(Node node){
         g.setColor(parseColor("#000000"));
         g.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
 
-        radius -= 5;
-        g.setColor(parseColor("#FFCDD2"));
+        radius-=5;
+        g.setColor(parseColor("#B2EBF2"));
         g.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
 
-        radius += 5;
+        radius+=5;
         g.setColor(parseColor("#000000"));
         drawCentreText(String.valueOf(node.getId()), node.getX(), node.getY());
     }
 
-    public void drawNode(Node node) {
+    public void drawNode(Node node){
         g.setColor(parseColor("#9C27B0"));
         g.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
 
-        radius -= 5;
+        radius-=5;
         g.setColor(parseColor("#E1BEE7"));
         g.fillOval(node.getX() - radius, node.getY() - radius, 2 * radius, 2 * radius);
 
-        radius += 5;
+        radius+=5;
         g.setColor(parseColor("#9C27B0"));
         drawCentreText(String.valueOf(node.getId()), node.getX(), node.getY());
     }

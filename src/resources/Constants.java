@@ -8,11 +8,10 @@ public interface Constants {
             + "<html> <b> 4, </b> Click on edges to set the weight\n\n" 
             + "<html> <b> <u>HotKeys\n" 
             + "<html><li>Shift + Left Click\t : <u>Set node as source\n"
-            + "<html> <li> Shift + Right Click\t : <u>Set node as destination\n" 
+            + "<html> <li> Shift + Right Click\t : <u>Set node as destination\n"
+            + "<html><li>Alt + Left Click\t : <u>Mark/Unmark Hospital\n"
+            + "<html><li>Alt + Right Click\t : <u>Mark/Unmark Red Zones\n"
             + "<html><li>Ctrl + Drag\t : <u>Reposition Node\t\n"
             + "<html><li>Ctrl + Click\t : <u>Get Path of Node</i>\n"
-            + "<html><li>Ctrl + Shift\t : <u>Click Delete Node/Edge\n" 
-            + "<html><li>Alt + Right Mouse\t : <u>Mark/Unmark Red Zones\n"
-            + "<html><li>Alt + Left Mouse\t : <u>Mark/Unmark Hospital</html>";
-
+            + "<html><li>Ctrl + Shift\t : <u>Click Delete Node/Edge</html>";
 }

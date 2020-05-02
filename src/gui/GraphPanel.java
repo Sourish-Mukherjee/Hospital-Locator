@@ -74,6 +74,8 @@ public class GraphPanel extends JPanel implements MouseListener, MouseMotionList
                 drawUtils.drawSourceNode(node);
             else if(graph.isDestination(node))
                 drawUtils.drawDestinationNode(node);
+            else if(graph.isRedZoneNode(node))
+            	drawUtils.drawRedZoneNode(node);
             else
                 drawUtils.drawNode(node);
         }
@@ -111,7 +113,13 @@ public class GraphPanel extends JPanel implements MouseListener, MouseMotionList
                         graph.setDestination(selected);
                     else
                         JOptionPane.showMessageDialog(null, "Source can't be set as Destination");
-                }else
+                } else if(SwingUtilities.isMiddleMouseButton(e)) {
+                	if(!graph.isRedZoneNode(selected))
+                		graph.setRedZone(selected);
+                	else
+                		graph.removeRedZone(selected);
+                }
+                else
                     return;
 
                 graph.setSolved(false);
